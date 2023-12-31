@@ -1,0 +1,32 @@
+/* footer */
+.footer {
+    color: var(--text-color3);
+    text-align: center;
+    background: var(--cor3);
+}
+
+.footer .footer-brand .footerlogo {
+    width: 2000px;
+    height: 200px;
+    background-color: blueviolet !important;
+}
+
+.footer a {
+    color: var(--text-color3) !important;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: var(--text-color2) !important;
+    text-decoration: underline;
+}
+
+.footer i, 
+.footer i:hover {
+    font-size: 1.2em;
+}
+
+.footer .social-media {
+    --bs-icon-link-transform: translate3d(0, -.125rem, 0);
+  }
+  
