@@ -7,7 +7,7 @@ const AddClient = () => {
 
 
 
-  const [newClient, setNewClient] = useState({ nome: "", imagemUrl: "" });
+  const [newClient, setNewClient] = useState({ nome: "", email: "", senha: "", telefone: "" });
   const router = useRouter();
 
   const handleInputChange = (e) => {
@@ -45,17 +45,56 @@ const AddClient = () => {
           </tr>
           <tr>
             <td>
-              <label>URL imagem:</label>
+              <label>Email:</label>
             </td>
             <td>
               <input
                 type="text"
-                name="imagemUrl"
-                value={newClient.imagemUrl}
+                name="email"
+                value={newClient.email}
                 onChange={handleInputChange}
               />
             </td>
           </tr>
+          <tr>
+            <td>
+              <label>Senha:</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                name="senha"
+                value={newClient.senha}
+                onChange={handleInputChange}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label>Telefone:</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                name="telefone"
+                value={newClient.telefone}
+                onChange={handleInputChange}
+              />
+            </td>
+          </tr>
+          {/* <tr>
+            <td>
+              <label>Reserva id:</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                name="reservaId"
+                value={newClient.reservaId}
+                onChange={handleInputChange}
+              />
+            </td>
+          </tr> */}
           <tr>
             <td colSpan="2">
               <button onClick={handleAddClient}>Inserir Cliente</button>

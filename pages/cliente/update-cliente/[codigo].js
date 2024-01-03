@@ -5,21 +5,21 @@ import { useRouter } from 'next/router';
 
 
 const UpdateClient = () => {
-  const [client, setClient] = useState({ clientId: "", nome: "", imagemUrl: "" });
+  const [client, setClient] = useState({ clienteId: "",  nome: "", email: "", senha: "", telefone: "" });
   const router = useRouter(); 
   const { codigo } = router.query;
 
   useEffect(() => {
     // Faça uma chamada GET para a API para obter detalhes do cliente a ser atualizado
     axios
-      .get("https://localhost:7216/api/Cliente" + client.clientId)
+      .get("https://localhost:7216/api/Cliente/" + client.clienteId)
       .then((response) => {
        setClient(response.data);      
       })
       .catch((error) => {
         console.error("Erro ao buscar detalhes do cliente:", error);
       });
-  }, [client.categoriaId]);
+  }, [client.clienteId]);
 
   const handleInputChange = (e) => {
     setClient({ ...client, [e.target.name]: e.target.value });
@@ -27,7 +27,7 @@ const UpdateClient = () => {
 
   const handleUpdateClient = () => {
     axios
-      .put("https://localhost:7216/api/Cliente" + client.clientId, client)
+      .put("https://localhost:7216/api/Cliente/" + client.clienteId, client)
       .then(() => {
         router.push('/cliente');    
    
@@ -45,14 +45,15 @@ const UpdateClient = () => {
         <tbody>
           <tr>
             <td>
-              <label>ID da Categoria:</label>
+              <label>Id do Cliente:</label>
             </td>
             <td>
               <input
                 type="text"
                 name="id"
-                value={client.clientId = codigo}
+                value={client.clienteId = codigo}
                 onChange={handleInputChange}
+                readOnly
               />
             </td>
           </tr>
@@ -71,17 +72,57 @@ const UpdateClient = () => {
           </tr>
           <tr>
             <td>
-              <label>Imagem URL:</label>
+              <label>Email:</label>
             </td>
             <td>
               <input
                 type="text"
-                name="imagemUrl"
-                value={client.imagemUrl}
+                name="email"
+                value={client.email}
+                placeholder={client.email}
                 onChange={handleInputChange}
               />
             </td>
           </tr>
+          <tr>
+            <td>
+              <label>Senha:</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                name="senha"
+                value={client.senha}
+                onChange={handleInputChange}
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label>Telefone:</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                name="telefone"
+                value={client.telefone}
+                onChange={handleInputChange}
+              />
+            </td>
+          </tr>
+          {/* <tr>
+            <td>
+              <label>Reserva id:</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                name="reservaId"
+                value={client.reservaId}
+                onChange={handleInputChange}
+              />
+            </td>
+          </tr> */}
           <tr>
             <td colSpan="2">
               <button onClick={handleUpdateClient}>Atualizar Cliente</button>

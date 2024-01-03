@@ -5,7 +5,7 @@
 }
 
 .h1{
-  color:aliceblue
+  color: blue;
 }
 
 .tabale tr td{
@@ -240,5 +240,102 @@
   }
   to {
     transform: rotate(0deg);
+  }
+}
+
+
+
+
+.homeHeader {
+  position: relative;
+}
+
+.homeHeader #menu {
+  background: transparent !important;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+/* .header #menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #333 !important;
+      color: #fff;
+      padding: 10px 0 !important;
+      text-align: center;
+      z-index: 1000;
+      margin: 0 !important;
+  } */
+/* 
+.offcanvas-lg a {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.offcanvas-lg .nav-link .active {
+  color: rgba(0, 0, 0, 1) !important;
+  font-weight: bold;
+}
+
+.offcanvas-lg a:hover {
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: bold;
+} */
+#offcanvas-btn {
+  background-color: transparent !important;
+}
+
+.homeHeader .carousel-caption {
+  font-family: 'Times New Roman', Times, serif;
+  height: 12em;
+  margin-bottom: 10em;
+}
+
+.homeHeader #carousel-principal .carousel-inner {
+  height: 40em;
+}
+
+.homeHeader #carousel-principal .carousel-item:nth-child(1) {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.35),
+      rgba(0, 0, 0, 0.25)), url(/images/carousel/desktop-1.jpg);
+}
+
+.homeHeader #carousel-principal .carousel-item:nth-child(2) {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.35),
+      rgba(0, 0, 0, 0.25)), url(/images/carousel/desktop-2.jpg);
+}
+
+.homeHeader #carousel-principal .carousel-item:nth-child(3) {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.35),
+      rgba(0, 0, 0, 0.25)), url(/images/carousel/desktop-3.jpg);
+}
+
+#top-destinos .card,
+#hospedagens .card,
+#pacotes .card,
+#passagens .card {
+  background: #FFF !important;
+  min-width: 230px !important;
+  margin: 0 1rem 1rem 0;
+}
+
+#ver-mais .btn {
+  font-size: .8em;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 25px;
+}
+
+.display-4 {
+  color: rgb(73, 73, 73);
+}
+
+@media (max-width : 650px) {
+  .display-4 {
+    font-size: 1.3em !important;
   }
 }

@@ -6,13 +6,13 @@ import { useRouter } from "next/router";
 const DeleteClient = () => {
   const router = useRouter();
   const { codigo } = router.query;
-  const [clientId, setClientId] = useState(codigo);
+  const [clienteId, setClientId] = useState(codigo);
  
 
   const handleDeleteClient = () => {
   
     axios
-      .delete("https://localhost:7017/api/Cliente/" + clientId)
+      .delete("https://localhost:7216/api/Cliente/" + clienteId)
       .then(() => {
         router.push("/cliente");
       })
