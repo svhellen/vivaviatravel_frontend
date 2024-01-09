@@ -1,19 +1,6 @@
 import React from "react";
+import 'bootstrap/dist/css/bootstrap.css';
 import styles from "../styles/Footer.module.css";
-
-
-// import Link from 'next/link';
-// import styles from '../styles/Footer.module.css';
-
-// const Navbar = () => {
-//   return (
-//     <nav className={styles.navbar}>
-//       <Link href="/cliente">Cliente</Link>
-//     </nav>
-//   );
-// };
-
-// export default Navbar;
 
 export default function Footer() {
   return (
@@ -23,7 +10,8 @@ export default function Footer() {
           {/* logo marca */}
           <div className="col-6 col-md-4 mb-3 text-md-start">
             <a className="footer-brand " href="#">
-              <img src="/images/logo.png" alt="logo" id="footer-logo" className={styles.footerlogo} style={{ width: "200px"}} />
+              <img src="/images/logo.png" alt="logo" id="footer-logo" 
+              className={styles.footerlogo} style={{ width: "200px"}} />
             </a>
             <p>Descubra o Mundo, Abrace a Jornada!</p>
           </div>
@@ -74,7 +62,6 @@ export default function Footer() {
               </a>
               <a
                 className="icon-link icon-link-hover list-inline-item"
-                style={{}}
                 href="#" >
                 <i className="bi bi-facebook" aria-hidden="true" />
               </a>

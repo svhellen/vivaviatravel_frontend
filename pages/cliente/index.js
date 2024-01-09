@@ -1,5 +1,4 @@
 import "bootstrap/dist/css/bootstrap.css";
-//import "bootstrap/dist/js/bootstrap.min.js";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import style from "../../styles/Home.module.css";
@@ -21,7 +20,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <section>
       <h1 className={style.h1}>Lista de Clientes</h1>
       <p>
         <Link href="cliente/add-cliente" style={{ backgroundColor: "green" , color:'white', textDecoration:'none'}}>
@@ -61,7 +60,7 @@ const Home = () => {
           </tbody>
         ))}
       </table>
-    </div>
+    </section>
   );
 };
 

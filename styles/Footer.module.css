@@ -5,10 +5,8 @@
     background: var(--cor3);
 }
 
-.footer .footer-brand .footerlogo {
-    width: 2000px;
-    height: 200px;
-    background-color: blueviolet !important;
+.footer img {
+    width: 200px ;
 }
 
 .footer a {
@@ -24,9 +22,5 @@
 .footer i, 
 .footer i:hover {
     font-size: 1.2em;
-}
-
-.footer .social-media {
     --bs-icon-link-transform: translate3d(0, -.125rem, 0);
-  }
-  
+}

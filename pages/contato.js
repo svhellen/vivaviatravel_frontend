@@ -1,9 +1,10 @@
 import React from "react";
 
-export default function contato() {
+export default function Contato() {
+
   return (
     <>
-      <div class=" bg-body-secondary sitePrincipal">
+      <div className=" bg-body-secondary sitePrincipal">
         {/* formulário contato */}
         <div className="container-fluid py-5 m-0" id="div-form-contato">
           <form className="d-grid gap-4 mx-auto p-3">
@@ -17,7 +18,7 @@ export default function contato() {
                 type="text"
                 className="form-control"
                 id="f-nome"
-                placeholder=""
+                placeholder="Maria Silva"
                 required=""
               />
             </div>
@@ -27,23 +28,23 @@ export default function contato() {
                 type="email"
                 className="form-control"
                 id="f-email"
-                placeholder=""
+                placeholder="maria@email.com"
                 required=""
               />
             </div>
             <div className="">
-              <label htmlFor="data-check-in">Celular</label>{" "}
+              <label htmlFor="f-tel">Celular</label>{" "}
               <input
                 type="tel"
                 className="form-control"
-                id="f-check-in"
-                placeholder="(99) 99999-9999"
+                id="f-tel"
+                placeholder="(99) 99999-0000"
                 required=""
               />
             </div>
             <div className="">
               <label htmlFor="f-msg">Mensagem</label>{" "}
-              <input type="text" className="form-control" id="f-msg" />
+              <textarea className="form-control" id="f-msg" />
             </div>
             <button type="submit" className="btn btn-primary">
               Enviar
@@ -56,7 +57,7 @@ export default function contato() {
               <h5 className="card-title">Central de Atendimento</h5>
               <h6 className="card-subtitle mb-2 text-body-secondary" />
               <p className="card-text">Suporte pós venda.</p>
-              <a href="#" className="card-link">
+              <a href="#central" className="card-link">
                 0800 000 0000
               </a>
             </div>
@@ -66,7 +67,7 @@ export default function contato() {
               <h5 className="card-title">Ajuda na compra</h5>
               <h6 className="card-subtitle mb-2 text-body-secondary" />
               <p className="card-text">Fale com um dos nossos agentes.</p>
-              <a href="" className="card-link">
+              <a href="#telefone" className="card-link">
                 99 99999-9999
               </a>
             </div>
@@ -76,7 +77,7 @@ export default function contato() {
               <h5 className="card-title">E-mail</h5>
               <h6 className="card-subtitle mb-2 text-body-secondary" />
               <p className="card-text">Entre em contato por email.</p>
-              <a href="#" className="card-link">
+              <a href="#email" className="card-link">
                 email@exemplo.com
               </a>
             </div>

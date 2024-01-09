@@ -1,25 +1,29 @@
+// pages/_app.js
 
-import 'bootstrap/dist/css/bootstrap.css';
-//import 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-//import 'bootstrap/dist/js/bootstrap.bundle.min.js';
-//import 'bootstrap/dist/js/bootstrap.bundle.js';
-import Navbar from '@/components/NavBar';
-import Footer from '@/components/Footer';
 import Layout from '@/components/Layout';
-import Script from 'next/script'
 import '@/styles/globals.css'
 
+import { useRouter } from 'next/router';
+
 export default function App({ Component, pageProps }) {
+  const router = useRouter();
+
+  // O pathname contém o caminho da URL da página atual
+  const currentPage = router.pathname;
+  let titulo = "Título Padrão";
+  let useCustomNavbar = false;
+
+  if (currentPage === "/") {
+    titulo = "Home";
+    useCustomNavbar = true;
+  }
+
   return (
     <>
-    <Layout>
-      {/* <Navbar /> */}
-      <Component {...pageProps} />
-      {/* <Footer /> */}
+      <Layout titulo={titulo} useCustomNavbar={useCustomNavbar}>
+        <Component {...pageProps} />
       </Layout>
-      <Script strategy='lazyOnload' 
-      id="stripe-js" src={`bootstrap/dist/js/bootstrap.bundle.js`}/>
     </>
   );
 }

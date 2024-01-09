@@ -1,13 +1,203 @@
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import styles from "@/styles/Navbar.module.css";
 import DropdownAdmin from "./DropdownAdmin";
+import "bootstrap/dist/css/bootstrap.css";
+import styles from "@/styles/Navbar.module.css";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
+  //     const router = useRouter();
+  //   const [activeKey, setActiveKey] = useState('/');
+
+  //   useEffect(() => {
+  //     // Atualizar o estado local quando a rota muda
+  //     setActiveKey(router.pathname);
+  //   }, [router.pathname]);
+
+  // return (
+  //   <>
+  //       <header className={styles.header}  activeKey={activeKey}>
+  //         <nav className="navbar navbar-expand-md navbar-dark" id={styles.menu}>
+  //           <div className="container-fluid">
+  //             <Link className="navbar-brand" href="/">
+  //               <Image
+  //                 src="/images/logo_principal.png"
+  //                 width={180}
+  //                 height={50}
+  //                 priority
+  //                 alt="logo vivavia travel"
+  //                 className={styles.logoPrincipal}
+  //               />
+  //             </Link>
+  //             {/* Button for small screens */}
+  //             <button
+  //               className="btn d-lg-none navbar-dark"
+  //               type="button"
+  //               data-bs-toggle="offcanvas"
+  //               data-bs-target="#offcanvasResponsive"
+  //               aria-controls="offcanvasResponsive"
+  //               id="offcanvas-btn"
+  //             >
+  //               <span className="navbar-toggler-icon" />
+  //             </button>
+  //             {/* Offcanvas menu */}
+  //             <div
+  //               className="offcanvas-lg offcanvas-end "
+  //               tabIndex={-1}
+  //               id="offcanvasResponsive"
+  //               aria-labelledby="offcanvasResponsiveLabel"
+  //             >
+  //               <div className="offcanvas-header">
+  //                 <h5
+  //                   className="offcanvas-title login "
+  //                   id="offcanvasResponsiveLabel"
+  //                 >
+  //                   <ul>
+  //                     <li className="nav-item">
+  //                       {/* <Link href="/admin" className="btn nav-link ">
+  //                         Crud
+  //                       </Link> */}
+  //                       <DropdownAdmin className="btn nav-link"/>
+
+  //                       {/* <div className="btn-group nav-link">
+  //   <button
+  //     type="button"
+  //     className="btn btn-secondary dropdown-toggle"
+  //     data-bs-toggle="dropdown"
+  //     aria-expanded="false"
+
+  //   >
+  //     Right-aligned menu example
+  //   </button>
+  //   <ul className="dropdown-menu dropdown-menu-end">
+  //     <li>
+  //       <button className="dropdown-item" type="button">
+  //         Action
+  //       </button>
+  //     </li>
+  //     <li>
+  //       <button className="dropdown-item" type="button">
+  //         Another action
+  //       </button>
+  //     </li>
+  //     <li>
+  //       <button className="dropdown-item" type="button">
+  //         Something else here
+  //       </button>
+  //     </li>
+  //   </ul>
+  // </div> */}
+
+  //                     </li>
+  //                   </ul>
+  //                 </h5>
+  //                 <button
+  //                   type="button"
+  //                   className="btn-close"
+  //                   data-bs-dismiss="offcanvas"
+  //                   data-bs-target="#offcanvasResponsive"
+  //                   aria-label="Close"
+  //                 />
+  //               </div>
+  //               {/* Navbar links */}
+  //               <ul className="navbar-nav offcanvas-body off col-lg-8 ">
+  //                 <li className="nav-item">
+  //                   <Link
+  //                     className="nav-link"
+  //                     // th:classappend="${#strings.equals('/home', currentPage) ? 'active' : ''}"
+  //                     href="/"
+  //                     activeKey="/"
+  //                   >
+  //                     Home
+  //                   </Link>
+  //                 </li>
+  //                 <li className="nav-item">
+  //                   <Link
+  //                     className="nav-link "
+  //                     // th:classappend="${#strings.equals('/hospedagens', currentPage) ? 'active' : ''}"
+  //                     href="/hospedagens"
+  //                     activeKey="/hospedagens"
+  //                   >
+  //                     Hospedagens
+  //                   </Link>
+  //                 </li>
+  //                 <li className="nav-item">
+  //                   <Link
+  //                     className="nav-link"
+  //                     // th:classappend="${#strings.equals('/passagens', currentPage) ? 'active' : ''}"
+  //                     href="/passagens"
+  //                   >
+  //                     Passagens
+  //                   </Link>
+  //                 </li>
+  //                 <li className="nav-item">
+  //                   <Link
+  //                     className="nav-link"
+  //                     // th:classappend="${#strings.equals('/promocoes', currentPage) ? 'active' : ''}"
+  //                     href="/promocoes"
+  //                   >
+  //                     Promocoes
+  //                   </Link>
+  //                 </li>
+  //                 <li className="nav-item">
+  //                   <Link
+  //                     className="nav-link"
+  //                     // th:classappend="${#strings.equals('/destinos', currentPage) ? 'active' : ''}"
+  //                     href="/destinos"
+  //                   >
+  //                     Destinos
+  //                   </Link>
+  //                 </li>
+  //                 <li className="nav-item">
+  //                   <Link
+  //                     className="nav-link"
+  //                     // th:classappend="${#strings.equals('/contato', currentPage) ? 'active' : ''}"
+  //                     href="/contato"
+  //                   >
+  //                     Contato
+  //                   </Link>
+  //                 </li>
+  //               </ul>
+  //             </div>
+  //             {/* Navbar links for larger screens
+  // th:classappend="${#strings.equals('/admin', currentPage) ? 'active' : ''}*/}
+  //             <div className=" d-none d-lg-block login ">
+  //               <ul className='my-auto'>
+  //                 {/* <li className="nav-item ">
+  //                   <Link className="btn nav-link active " href="/cliente">
+  //                     Crud
+  //                   </Link>
+  //                 </li> */}
+  //                 <li className="nav-item ">
+  //                   <DropdownAdmin  className="btn nav-link active  " />
+  //                 </li>
+  //               </ul>
+
+  //             </div>
+  //           </div>
+  //           <hr />
+  //         </nav>
+  //         {/* <div>{children}</div> */}
+  //         {/* <UncontrolledExample/> */}
+  //       </header>
+  const router = useRouter();
+  const [activeKey, setActiveKey] = useState("/");
+
+  useEffect(() => {
+    // Atualizar o estado local quando a rota muda
+    setActiveKey(router.pathname);
+  }, [router.pathname]);
+
+  const isLinkActive = (href) => {
+    return href === activeKey ? "active" : "";
+  };
+
   return (
     <>
       <header className={styles.header}>
-        <nav className="navbar navbar-expand-md navbar-dark" id="menu">
+        <nav className="navbar navbar-expand-md navbar-dark" id={styles.menu} >
           <div className="container-fluid">
             <Link className="navbar-brand" href="/">
               <Image
@@ -44,40 +234,11 @@ const Navbar = () => {
                 >
                   <ul>
                     <li className="nav-item">
-                      {/* <Link href="/admin" className="btn nav-link ">
-                        Crud
-                      </Link> */}
-                      <DropdownAdmin className="btn nav-link "/>
-
-                      {/* <div className="btn-group nav-link">
-  <button
-    type="button"
-    className="btn btn-secondary dropdown-toggle"
-    data-bs-toggle="dropdown"
-    aria-expanded="false"
-    
-  >
-    Right-aligned menu example
-  </button>
-  <ul className="dropdown-menu dropdown-menu-end">
-    <li>
-      <button className="dropdown-item" type="button">
-        Action
-      </button>
-    </li>
-    <li>
-      <button className="dropdown-item" type="button">
-        Another action
-      </button>
-    </li>
-    <li>
-      <button className="dropdown-item" type="button">
-        Something else here
-      </button>
-    </li>
-  </ul>
-</div> */}
-
+                    <DropdownAdmin
+                    className={`btn nav-link ${isLinkActive(
+                      "/cliente" || "/passagem" || "/reserva"
+                    )}`}
+                  />
                     </li>
                   </ul>
                 </h5>
@@ -92,27 +253,22 @@ const Navbar = () => {
               {/* Navbar links */}
               <ul className="navbar-nav offcanvas-body off col-lg-8 ">
                 <li className="nav-item">
-                  <Link
-                    className="nav-link"
-                    // th:classappend="${#strings.equals('/home', currentPage) ? 'active' : ''}"
-                    href="/"
-                  >
+                  <Link className={`nav-link ${isLinkActive("/")}`} href="/">
                     Home
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link
-                    className="nav-link"
-                    // th:classappend="${#strings.equals('/hospedagens', currentPage) ? 'active' : ''}"
+      
                     href="/hospedagens"
+                    className={`nav-link ${isLinkActive("/hospedagens")}`}
                   >
                     Hospedagens
                   </Link>
                 </li>
                 <li className="nav-item">
                   <Link
-                    className="nav-link"
-                    // th:classappend="${#strings.equals('/passagens', currentPage) ? 'active' : ''}"
+                    className={`nav-link ${isLinkActive("/passagens")}`}
                     href="/passagens"
                   >
                     Passagens
@@ -120,8 +276,7 @@ const Navbar = () => {
                 </li>
                 <li className="nav-item">
                   <Link
-                    className="nav-link"
-                    // th:classappend="${#strings.equals('/promocoes', currentPage) ? 'active' : ''}"
+                    className={`nav-link ${isLinkActive("/promocoes")}`}
                     href="/promocoes"
                   >
                     Promocoes
@@ -129,8 +284,7 @@ const Navbar = () => {
                 </li>
                 <li className="nav-item">
                   <Link
-                    className="nav-link"
-                    // th:classappend="${#strings.equals('/destinos', currentPage) ? 'active' : ''}"
+                    className={`nav-link ${isLinkActive("/destinos")}`}
                     href="/destinos"
                   >
                     Destinos
@@ -138,8 +292,7 @@ const Navbar = () => {
                 </li>
                 <li className="nav-item">
                   <Link
-                    className="nav-link"
-                    // th:classappend="${#strings.equals('/contato', currentPage) ? 'active' : ''}"
+                    className={`nav-link ${isLinkActive("/contato")}`}
                     href="/contato"
                   >
                     Contato
@@ -147,26 +300,20 @@ const Navbar = () => {
                 </li>
               </ul>
             </div>
-            {/* Navbar links for larger screens d-none 
-th:classappend="${#strings.equals('/admin', currentPage) ? 'active' : ''}*/}
-            <div className="d-lg-block login ">
-              <ul className=" ">
+            {/* Navbar links for larger screens*/}
+            <div className=" d-none d-lg-block login ">
+              <ul className="my-auto">
                 <li className="nav-item ">
-                  <Link className="btn nav-link active " href="/cliente">
-                    Crud
-                  </Link>
-                </li>
-                <li className="nav-item ">
-                  <DropdownAdmin  className="btn nav-link active  " />
+                  <DropdownAdmin
+                    className={`btn nav-link ${isLinkActive(
+                      "/cliente" || "/passagem" || "/reserva"
+                    )}`}
+                  />
                 </li>
               </ul>
-
-              {/*  */}
-
-
             </div>
           </div>
-          <hr />
+          {/* <hr /> */}
         </nav>
       </header>
     </>
