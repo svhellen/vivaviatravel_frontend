@@ -41,7 +41,7 @@ const Home = () => {
         </thead>
         {reservas.map((element) => (
           <tbody>
-            <tr key={element.reservaId} className={style.tabela}>
+            <tr key={element.id} className={style.tabela}>
               <td>{element.reservaId}</td>
               <td>{element.cliente.nome}</td>
               <td>{element.tipoServico}</td>
