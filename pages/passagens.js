@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Head from "next/head";
+import axios from "axios";
 
 export default function Passagens() {
-  
-  const [data, setData] = useState(null);
+  const [passagens, setPassagens] = useState([]);
 
   useEffect(() => {
-    // Faz a chamada para a API simulada ao carregar a página
-    fetch("/api/fakeData")
-      .then((response) => response.json())
-      .then((responseData) => setData(responseData));
-  }, []);
+      //get all tickets from api
+      axios
+      .get("http://vivaviatravel.somee.com/api/Passagem")
+      .then((response) => {
+          setPassagens(response.data);
+  })
+  .catch((error) => {
+      console.error("Erro ao buscar a lista de passagens: ", error);
+  });
+}, []);
 
   return (
     <>
@@ -100,25 +105,26 @@ export default function Passagens() {
           {/* cards passagens  */}
           <section id="passagens" className="container-fluid py-3 my-3 mx-auto">
             <h1>Passagens</h1>
-            {data && (
+            
               <div className="row row-cols g-4 py-3">
-                {data.passagens.map((passagem) => (
-                  <div key={passagem.id} className="col">
+                {passagens.map((passagem) => (
+                  <div key={passagem.passagemId} className="col">
                     <div className="card ">
                       <Image
-                        src={passagem.imgSrc}
+                        src={passagem.imagemUrl}
                         className="img-fluid rounded-start"
                         width={500}
                         height={300}
                         alt="..."
                       />
+                      
                       <div className="card-body">
                         <h5 className="card-title">
                           Passagem para {passagem.destino}
                         </h5>
                         <p className="card-subtitle">Classe: {passagem.classe}</p>
                         <p>
-                          <i className="bi bi-airplane" /> Saindo de {passagem.origem}{" "}
+                          <i className="bi bi-airplane" /> Saindo de {passagem.origem}
                         </p>
                         <p>
                           <i className="bi bi-airplane" /> Para {passagem.destino}
@@ -139,7 +145,7 @@ export default function Passagens() {
                   </div>
                 ))}
               </div>
-            )}
+            
           </section>
         </div>
     </>

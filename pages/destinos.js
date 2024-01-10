@@ -1,16 +1,23 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import axios from "axios";
 
 export default function Destinos() {
 
-  const [data, setData] = useState(null);
+  const [destinos, setDestinos] = useState([]);
 
   useEffect(() => {
-    fetch("/api/fakeData")
-      .then((response) => response.json())
-      .then((respondeData) => setData(respondeData));
-  }, []);
+      
+      axios
+      .get("http://vivaviatravel.somee.com/api/Destino")
+      .then((response) => {
+          setDestinos(response.data);
+  })
+  .catch((error) => {
+      console.error("Erro ao buscar a lista de destinos: ", error);
+  });
+}, []);
   
   return (
     <>
@@ -34,19 +41,22 @@ export default function Destinos() {
           {/* cards destinos  */}
           <section id="destinos" className="container-fluid py-3 my-3 mx-auto">
             <h1>Destinos em alta</h1>
-            {data && (
               <div className="row row-cols g-2 py-3">
-                {data.destinos.map((destino) => (
-                  <div key={destino.id} className="col col-lg-6">
+                {destinos.map((destino) => (
+                  <div key={destino.destinoId} className="col col-lg-6">
                     <div className="card text-bg-dark">
                       <Image
-                        src={destino.imgSrc}
+                        src={destino.imagemUrl}
                         className="card-img"
-                        width={500} 
-                        height={300} 
-                        alt="..."
-                        layout="responsive"
-                        objectFit="cover" 
+                        sizes="100%"
+                        
+                        width={500}
+                        height={300}
+
+                        style={{
+                          width: '100%',
+                          height: 'auto',
+                        }}
                       />
                       <div className="card-img-overlay">
                         <h4 className="card-title">{destino.cidade}</h4>
@@ -55,7 +65,6 @@ export default function Destinos() {
                   </div>
                 ))}
               </div>
-            )}
           </section>
         </div>
     </>

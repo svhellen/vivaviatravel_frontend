@@ -3,32 +3,34 @@ import { useState, useEffect } from "react";
 import BackgroundChanger from "@/components/BackgroundChanger";
 import Image from "next/image";
 import OffcanvasExample from "@/components/NavbarBs";
+import axios from "axios";
 
 const Teste = () => {
-  const [data, setData] = useState(null);
+  // const [data, setData] = useState(null);
+
+  // useEffect(() => {
+  //   // Faz a chamada para a API simulada ao carregar a página
+  //   fetch("/api/fakeData")
+  //     .then((response) => response.json())
+  //     .then((responseData) => setData(responseData));
+  // }, []);
+
+  const [destinos, setDestinos] = useState([]);
 
   useEffect(() => {
-    // Faz a chamada para a API simulada ao carregar a página
-    fetch("/api/fakeData")
-      .then((response) => response.json())
-      .then((responseData) => setData(responseData));
-  }, []);
+      //get all tickets from api
+      //http://vivaviatravel.somee.com
+      axios.get("https://localhost:7049/api/Destino")
+      .then((response) => {
+          setDestinos(response.data);
+  })
+  .catch((error) => {
+      console.error("Erro ao buscar a lista de destinos: ", error);
+  });
+}, []);
 
   return (
     <>
-<OffcanvasExample/>
-      <h1>Postagens:</h1>
-      {/* {data && (
-        <ul>
-          {data.posts.map((post) => (
-            <li key={post.id}>
-              <h3>{post.title}</h3>
-              <p>{post.content}</p>
-            </li>
-          ))}
-        </ul>
-      )} */}
-
       <div className="d-grid">
         {/* cards hospedagens  */}
         <section id="hospedagens" className="container-fluid py-3 my-3 mx-auto">
@@ -80,6 +82,28 @@ const Teste = () => {
           </div>
           )}
         </section>
+
+        <div className="row row-cols g-2 py-3">
+                {destinos.map((destino) => (
+                  <div key={destino.destinoId} className="col col-lg-6">
+                    <div className="card text-bg-dark">
+                      <Image
+                        src={destino.imagemUrl}
+                        className="card-img"
+                        width={500} 
+                        height={300} 
+                        alt="..."
+                        layout="responsive"
+                        objectFit="cover" 
+                      />
+                      <div className="card-img-overlay">
+                        <h4 className="card-title">{destino.cidade}</h4>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
       </div>
       <BackgroundChanger/>
     </>

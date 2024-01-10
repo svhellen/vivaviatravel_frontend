@@ -1,21 +1,27 @@
+import axios from "axios";
 import React from "react";
 import { useState, useEffect } from "react";
 
 const Hospedagens = () => {
   
-  const [data, setData] = useState(null);
+  const [hospedagens, setHospedagens] = useState([]);
 
   useEffect(() => {
-    // Faz a chamada para a API simulada ao carregar a página
-    fetch("/api/fakeData")
-      .then((response) => response.json())
-      .then((responseData) => setData(responseData));
-  }, []);
+      //get all tickets from api
+      axios
+      .get("http://vivaviatravel.somee.com/api/Hospedagem")
+      .then((response) => {
+          setHospedagens(response.data);
+  })
+  .catch((error) => {
+      console.error("Erro ao buscar a lista de hospedagens: ", error);
+  });
+}, []);
 
   return (
     <>
       {/* formulário hospedagem */}
-      <div className="container-fluid py-5" id="div-form">
+      <div className="div-form container-fluid py-5" >
         <form className="d-grid gap-4 mx-auto p-3">
           <h4>Hospedagens</h4>
           <div className="">
@@ -90,13 +96,13 @@ const Hospedagens = () => {
             className="container-fluid py-3 my-3 mx-auto"
           >
             <h1>Hospedagens em alta</h1>
-            {data && (
+            
               <div className="row row-cols g-4 py-3">
-                {data.hospedagens.map((hospedagem) => (
-                  <div key={hospedagem.id} className="col">
+                {hospedagens.map((hospedagem) => (
+                  <div key={hospedagem.hospedagemId} className="col">
                     <div className="card ">
                       <img
-                        src={hospedagem.imgSrc}
+                        src={hospedagem.imagemUrl}
                         className="card-img-top"
                         width={300} 
                         height={300} 
@@ -118,14 +124,14 @@ const Hospedagens = () => {
                         </div>
                         <p>
                           <i className="bi bi-geo-alt" />
-                          {hospedagem.nomeLocal}
+                          {hospedagem.localizacao}
                         </p>
                         <p className="card-text">{hospedagem.descricao}</p>
                         <p>
                           Preço a partir de{" "}
-                          <strong>R$ {hospedagem.preco}</strong>
+                          <strong>R$ {hospedagem.precoDiaria}</strong>
                         </p>
-                        <a href="#" className=" btn btn-primary d-block">
+                        <a href="#detalhes" className=" btn btn-primary d-block">
                           Ver detalhes
                         </a>
                       </div>
@@ -133,7 +139,7 @@ const Hospedagens = () => {
                   </div>
                 ))}
               </div>
-            )}
+           
           </section>
         </div>
     </>

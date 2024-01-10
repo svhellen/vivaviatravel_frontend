@@ -12,7 +12,7 @@ export default function Layout({ children, titulo, useCustomNavbar}) {
     <>
       <Head>
         <link rel="shortcut icon" href="/images/favicon.ico" />
-        <title>VivaVia Travel - {titulo}</title>
+        <title>{titulo}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/images/favicon.ico" />
       </Head>

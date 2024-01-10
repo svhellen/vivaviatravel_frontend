@@ -11,11 +11,11 @@ export default function App({ Component, pageProps }) {
 
   // O pathname contém o caminho da URL da página atual
   const currentPage = router.pathname;
-  let titulo = "Título Padrão";
+  let titulo = "VivaVia Travel";
   let useCustomNavbar = false;
 
   if (currentPage === "/") {
-    titulo = "Home";
+    titulo = "VivaVia Travel - Home";
     useCustomNavbar = true;
   }
 

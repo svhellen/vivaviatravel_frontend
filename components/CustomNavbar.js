@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./NavBar";
-import UncontrolledExample from "./BsCarouselHome";
+import BsCarouselHome from "./BsCarouselHome";
 import styles from "@/styles/Home.module.css";
 import Link from "next/link";
 import Image from "next/image";
@@ -178,7 +178,7 @@ const CustomNavbar = () => {
           {/* <hr /> */}
         </nav>
         {/* <div>{children}</div> */}
-        <UncontrolledExample/>
+        <BsCarouselHome/>
       </header>
     </>
   );

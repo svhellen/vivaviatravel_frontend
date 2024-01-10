@@ -3,17 +3,61 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "@/styles/Home.module.css";
 import { useEffect, useState } from "react";
+import axios from "axios";
 // import CustomNavbar from '@/components/CustomNavbar'
 // import { CarouselHome } from '@/components/BsCarouselHome'
 
 export default function Home() {
-  const [data, setData] = useState(null);
+  // const [data, setData] = useState(null);
+
+  // useEffect(() => {
+  //   // Faz a chamada para a API simulada ao carregar a página
+  //   fetch("/api/fakeData")
+  //     .then((response) => response.json())
+  //     .then((responseData) => setData(responseData));
+  // }, []);
+
+  const [hospedagens, setHospedagens] = useState([]);
+  const [passagens, setPassagens] = useState([]);
+  const [pacotes, setPacotes] = useState([]);
+  const [destinos, setDestinos] = useState([]);
 
   useEffect(() => {
-    // Faz a chamada para a API simulada ao carregar a página
-    fetch("/api/fakeData")
-      .then((response) => response.json())
-      .then((responseData) => setData(responseData));
+    // Hospedagem
+    axios.get('http://vivaviatravel.somee.com/api/Hospedagem')
+      .then((response) => {
+        setHospedagens(response.data);
+      })
+      .catch((error) => {
+        console.error('Erro ao buscar a lista de hospedagens: ', error);
+      });
+
+    // Passagem
+    axios.get('http://vivaviatravel.somee.com/api/Passagem')
+      .then((response) => {
+        setPassagens(response.data);
+      })
+      .catch((error) => {
+        console.error('Erro ao buscar a lista de passagens: ', error);
+      });
+
+    // Pacote
+    axios.get('http://vivaviatravel.somee.com/api/Pacote')
+      .then((response) => {
+        setPacotes(response.data);
+      })
+      .catch((error) => {
+        console.error('Erro ao buscar a lista de pacotes: ', error);
+      });
+
+    // Destino
+    axios.get('http://vivaviatravel.somee.com/api/Destino')
+      .then((response) => {
+        setDestinos(response.data);
+      })
+      .catch((error) => {
+        console.error('Erro ao buscar a lista de destinos: ', error);
+      });
   }, []);
 
   return (
@@ -27,9 +71,9 @@ export default function Home() {
       {/* <CustomNavbar/>  */}
       {/* <Layout titulo="Título da Página" useCustomNavbar={true}>  pageProps.titulo={"titulo page"}
   <main>*/}
-      {data && (
+      {/* {data && ( */}
         <>
-          <div id="" className="container-fluid py-3 my-3 mx-auto">
+          <div className="container-fluid py-3 my-3 mx-auto">
             <section id="top-destinos">
               <div>
                 <div className="d-flex justify-content-between" id="ver-mais">
@@ -43,11 +87,11 @@ export default function Home() {
                 </p>
               </div>
               <div className="card-group gap-3">
-                {data.destinos.slice(0, 2).map((destino) => (
-                  <div key={destino.id} className="card text-bg-dark">
+                {destinos.slice(0, 2).map((destino) => (
+                  <div key={destino.destinoId} className="card text-bg-dark">
                     <Image
                       className="card-img"
-                      src={destino.imgSrc}
+                      src={destino.imagemUrl}
                       width={500}
                       height={300}
                       alt="..."
@@ -68,11 +112,11 @@ export default function Home() {
               className="container-fluid py-3 my-3 mx-auto"
             >
               <div>
-                <div className="d-flex justify-content-between" id="ver-mais">
+                <div className="d-flex justify-content-between ver-mais" >
                   <h1 className=" ">Hospedagens</h1>
-                  <a className="btn" href="views/_pages/hospedagens.jsp">
+                  <Link className="btn" href="hospedagens">
                     Ver mais
-                  </a>
+                  </Link>
                 </div>
                 <p className="display-4">
                   Milhares de hotéis para você encontrar o perfeito pras suas
@@ -80,10 +124,10 @@ export default function Home() {
                 </p>
               </div>
               <div className="d-flex flex-nowrap justify-content-between overflow-x-scroll  ">
-                {data.hospedagens.slice(0, 4).map((hospedagem) => (
-                  <div key={hospedagem.id} className="card ">
+                {hospedagens.slice(0, 4).map((hospedagem) => (
+                  <div key={hospedagem.hospedagemId} className="card ">
                     <img
-                      src={hospedagem.imgSrc}
+                      src={hospedagem.imagemUrl}
                       className="img-fluid rounded-start"
                       alt="..."
                     />
@@ -104,7 +148,7 @@ export default function Home() {
                       </p>
                       <p className="card-text">{hospedagem.descricao}</p>
                       <p>
-                        Preço a partir de <strong>R$ {hospedagem.preco}</strong>
+                        Preço a partir de <strong>R$ {hospedagem.precoDiaria}</strong>
                       </p>
                       <a href="#detalhes" className=" btn btn-primary d-block">
                         Ver detalhes
@@ -119,21 +163,21 @@ export default function Home() {
               id="passagens"
               className="container-fluid py-3 my-3 mx-auto"
             >
-              <div className=" " id="ver-mais">
+              <div className=" ver-mais" >
                 <div className="d-flex justify-content-between">
                   <h1>Passagens Aéreas</h1>
-                  <a className="btn" href="views/_pages/passagens.jsp">
+                  <Link className="btn" href="/passagens">
                     Ver mais
-                  </a>
+                  </Link>
                 </div>
                 <p className="display-4">Compre passagens com um clique.</p>
               </div>
               <div className="d-flex flex-nowrap justify-content-between overflow-x-scroll   ">
-                {data.passagens.slice(0, 4).map((passagem) => (
-                  <div key={passagem.id} className="">
+                {passagens.slice(0, 4).map((passagem) => (
+                  <div key={passagem.passagemId} className="">
                     <div className="card ">
                       <img
-                        src={passagem.imgSrc}
+                        src={passagem.imagemUrl}
                         className="img-fluid rounded-start"
                         alt="..."
                       />
@@ -174,19 +218,19 @@ export default function Home() {
               id="promocoes"
               className="container-fluid py-3 my-3 mx-auto"
             >
-              <div className=" " id="ver-mais">
+              <div className=" ver-mais" >
                 <div className="d-flex justify-content-between">
                   <h1>Pacotes promocionais</h1>
-                  <a className="btn" href="views/_pages/promocoes.jsp">
+                  <Link className="btn" href="/promocoes">
                     Ver mais
-                  </a>
+                  </Link>
                 </div>
                 <p className="display-4">
                   Adquira pacotes com preços incríveis.
                 </p>
               </div>
               <div className="d-flex flex-nowrap justify-content-between overflow-x-scroll  ">
-                {data.promocoes.slice(0, 4).map((promocao) => (
+                {pacotes.slice(0, 4).map((promocao) => (
                   <div key={promocao.id} className="">
                     <div className="card ">
                       <img
@@ -196,7 +240,7 @@ export default function Home() {
                       />
                       <div className="card-body">
                         <span className="balao-promo position-absolute top-0">
-                          -{promocao.percentPromo}%
+                          -{promocao.percentDesconto}%
                         </span>
                         <h5 className="card-title">
                           Pacote para {promocao.passagem.destino}
@@ -219,9 +263,9 @@ export default function Home() {
                           <strong>
                             R$
                             {2 *
-                              (promocao.hospedagem.preco +
+                              (promocao.hospedagem.precoDiaria +
                                 promocao.passagem.preco) -
-                              promocao.percentPromo}
+                              promocao.percentDesconto}
                           </strong>
                         </p>
                         <a href="#detalhes" className=" btn btn-primary d-block">
@@ -235,7 +279,7 @@ export default function Home() {
             </section>
           </div>
         </>
-      )}
+      {/* )} */}
       {/* </main>
    </Layout> */}
     </>

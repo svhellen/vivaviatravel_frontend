@@ -4,55 +4,55 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const Home = () => {
-    const [tickets, setTickets] = useState([]);
+    const [pacotes, setPacotes] = useState([]);
 
     useEffect(() => {
         //get all tickets from api
-        axios.get("http://vivaviatravel.somee.com/api/Passagem")
+        axios.get("http://vivaviatravel.somee.com/api/Pacote")
         .then((response) => {
-            setTickets(response.data);
+          setPacotes(response.data);
     })
     .catch((error) => {
-        console.error("Erro ao buscar a lista de passagens: ", error);
+        console.error("Erro ao buscar a lista de pacotes: ", error);
     });
 }, []);
 
 return (
     <section>
-      <h1 className={style.h1}>Lista de Passagens</h1>
+      <h1 className={style.h1}>Lista de Pacotes</h1>
       <p>
-        <Link href="passagem/add-passagem" className="btn-add-admin">
-          Inserir Passagem
+        <Link href="pacote/add-pacote" className="btn-add-admin">
+          Inserir Destino
         </Link>
       </p>
       <table className="table container tabela">
         <thead>
           <tr>
-            <th>Passagem Id</th>
-            <th>Origem</th>
-            <th>Destino</th>
+            <th>Pacote Id</th>
+            <th>Nome hotel</th>
+            <th>Destino passagem</th>
             <th>Ações</th>
           </tr>
         </thead>
-        {tickets.map((element) => (
+        {pacotes.map((element) => (
           <tbody key={element.id}>
             <tr className={style.tabela}>
-              <td>{element.passagemId}</td>
-              <td>{element.origem}</td>
-              <td>{element.destino}</td>
+              <td>{element.pacoteId}</td>
+              <td>{element.hospedagem.nomeHotel}</td>
+              <td>{element.passagem.destino}</td>
               <td>
                 <Link
-                  href={`passagem/update-passagem/${element.passagemId}`}
+                  href={`destino/update-destino/${element.pacoteId}`}
                   className="btn btn-warning"
                 >
                   Editar
                 </Link>
-                <Link
-                  href={`passagem/delete-passagem/${element.passagemId}`}
+                {/* <Link
+                  href={`destino/delete-destino/${element.destinoId}`}
                   className="btn btn btn-danger"
                 >
                   Excluir
-                </Link>
+                </Link> */}
               </td>
             </tr>
           </tbody>

@@ -5,7 +5,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import Image from 'next/image';
 import style from '@/styles/Carousel.module.css'
 
-function UncontrolledExample(content) {
+function BsCarouselHome(content) {
   return (
   
     // className="carousel slide carousel-fade"
@@ -22,21 +22,19 @@ function UncontrolledExample(content) {
       <Carousel.Item  id={`item-1`} className={`item`}>
         {/* <ExampleCarouselImage text="Second slide" /> */}
         <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        {/* <h3 className=" display-4">Descubra o Mundo</h3> */}
+        <h3>Explore novos horizontes e destinos deslumbrantes.</h3>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item id={`item-1`} className={`item`}>
         {/* <ExampleCarouselImage text="Third slide" /> */}
         <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
+        {/* <h3 className=" display-4">Descubra o Mundo</h3> */}
+        <h3>Viva momentos inesquecíveis em sua jornada pelo mundo.</h3>
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel>
   );
 }
 
-export default UncontrolledExample;
+export default BsCarouselHome;

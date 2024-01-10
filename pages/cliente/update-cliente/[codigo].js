@@ -12,7 +12,7 @@ const UpdateClient = () => {
   useEffect(() => {
     // Faça uma chamada GET para a API para obter detalhes do cliente a ser atualizado
     axios
-      .get("https://localhost:7216/api/Cliente/" + client.clienteId)
+      .get("https://localhost:7049/api/Cliente/" + client.clienteId)
       .then((response) => {
        setClient(response.data);      
       })
@@ -27,7 +27,7 @@ const UpdateClient = () => {
 
   const handleUpdateClient = () => {
     axios
-      .put("https://localhost:7216/api/Cliente/" + client.clienteId, client)
+      .put("https://localhost:7049/api/Cliente/" + client.clienteId, client)
       .then(() => {
         router.push('/cliente');    
    

@@ -19,7 +19,10 @@ function DropdownAdmin() {
         {/*  as={CustomMenu} */}
         <Dropdown.Item className='' href="/cliente">Clientes</Dropdown.Item>
         <Dropdown.Item href="/passagem">Passagens</Dropdown.Item>
+        <Dropdown.Item href="/hospedagem">Hospedagens</Dropdown.Item>
+        <Dropdown.Item href="/pacote">Pacotes</Dropdown.Item>
         <Dropdown.Item href="/reserva">Reservas</Dropdown.Item>
+        <Dropdown.Item href="/destino">Destinos</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   );

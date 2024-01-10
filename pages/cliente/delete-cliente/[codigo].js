@@ -12,7 +12,7 @@ const DeleteClient = () => {
   const handleDeleteClient = () => {
   
     axios
-      .delete("https://localhost:7216/api/Cliente/" + clienteId)
+      .delete("https://localhost:7049/api/Cliente/" + clienteId)
       .then(() => {
         router.push("/cliente");
       })

@@ -10,7 +10,7 @@ const Home = () => {
   useEffect(() => {
     // get all clients from api
     axios
-      .get("https://localhost:7216/api/Cliente")
+      .get("http://vivaviatravel.somee.com/api/Cliente")
       .then((response) => {
         setClients(response.data);
       })
@@ -23,7 +23,8 @@ const Home = () => {
     <section>
       <h1 className={style.h1}>Lista de Clientes</h1>
       <p>
-        <Link href="cliente/add-cliente" style={{ backgroundColor: "green" , color:'white', textDecoration:'none'}}>
+        <Link href="cliente/add-cliente" 
+        className="btn-add-admin" >
           Inserir Cliente
         </Link>
       </p>

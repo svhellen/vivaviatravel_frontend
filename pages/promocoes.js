@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import axios from "axios";
 
 export default function Promocoes() {
-  const [data, setData] = useState(null);
+  const [pacotes, setPacotes] = useState([]);
 
   useEffect(() => {
-    // Faz a chamada para a API simulada ao carregar a página
-    fetch("/api/fakeData")
-      .then((response) => response.json())
-      .then((responseData) => setData(responseData));
-  }, []);
+      //get all tickets from api
+      axios.get("http://vivaviatravel.somee.com/api/Pacote")
+      .then((response) => {
+        setPacotes(response.data);
+  })
+  .catch((error) => {
+      console.error("Erro ao buscar a lista de pacotes: ", error);
+  });
+}, []);
 
   return (
     <>
@@ -19,13 +24,13 @@ export default function Promocoes() {
         {/* cards promocoes  */}
         <section id="promocoes" className="container-fluid py-3 my-3 mx-auto">
           <h1>Pacotes promocionais</h1>
-          {data && (
+          {/* {data && ( */}
             <div className="row row-cols g-4 py-3">
-              {data.promocoes.map((promocao) => (
-                <div key={promocao.id} className="col">
+              {pacotes.map((promocao) => (
+                <div key={promocao.pacoteId} className="col">
                   <div className="card ">
                     <Image
-                      src={promocao.imgSrc}
+                      src={promocao.imagemUrl}
                       className="img-fluid rounded-start"
                       width={500}
                       height={300}
@@ -35,7 +40,7 @@ export default function Promocoes() {
                     />
                     <div className="card-body">
                       <span className="balao-promo position-absolute top-0">
-                        -{promocao.percentPromo}%
+                        -{promocao.percentDesconto}%
                       </span>
                       <h5 className="card-title">
                         Pacote para {promocao.passagem.destino}
@@ -59,9 +64,9 @@ export default function Promocoes() {
                         <strong>
                           R$ 
                           {2 *
-                            (promocao.hospedagem.preco +
+                            (promocao.hospedagem.precoDiaria +
                               promocao.passagem.preco) -
-                            promocao.percentPromo}
+                            promocao.percentDesconto}
                         </strong>
                       </p>
                       <a href="#detalhes" className=" btn btn-primary d-block">
@@ -72,7 +77,7 @@ export default function Promocoes() {
                 </div>
               ))}
             </div>
-          )}
+          {/* )} */}
 
           {/* <div className="col">
           <div className="card ">
