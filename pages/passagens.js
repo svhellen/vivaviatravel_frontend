@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
+//import Image from "next/image";
+import { Image } from "react-bootstrap";
 import Head from "next/head";
 import axios from "axios";
 
@@ -112,9 +113,7 @@ export default function Passagens() {
                     <div className="card ">
                       <Image
                         src={passagem.imagemUrl}
-                        className="img-fluid rounded-start"
-                        width={500}
-                        height={300}
+                        fluid
                         alt="..."
                       />
                       

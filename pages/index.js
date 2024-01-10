@@ -1,21 +1,11 @@
 import Head from "next/head";
-import Image from "next/image";
+import { Image } from "react-bootstrap";
 import Link from "next/link";
 import styles from "@/styles/Home.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
-// import CustomNavbar from '@/components/CustomNavbar'
-// import { CarouselHome } from '@/components/BsCarouselHome'
 
 export default function Home() {
-  // const [data, setData] = useState(null);
-
-  // useEffect(() => {
-  //   // Faz a chamada para a API simulada ao carregar a página
-  //   fetch("/api/fakeData")
-  //     .then((response) => response.json())
-  //     .then((responseData) => setData(responseData));
-  // }, []);
 
   const [hospedagens, setHospedagens] = useState([]);
   const [passagens, setPassagens] = useState([]);
@@ -65,18 +55,11 @@ export default function Home() {
       <Head>
         <title>VivaVia Travel</title>
       </Head>
-      {/* <Navbar>
-        <CarouselHome />
-      </Navbar>*/}
-      {/* <CustomNavbar/>  */}
-      {/* <Layout titulo="Título da Página" useCustomNavbar={true}>  pageProps.titulo={"titulo page"}
-  <main>*/}
-      {/* {data && ( */}
         <>
           <div className="container-fluid py-3 my-3 mx-auto">
             <section id="top-destinos">
               <div>
-                <div className="d-flex justify-content-between" id="ver-mais">
+                <div className="d-flex justify-content-between ver-mais" >
                   <h1>Destinos</h1>
                   <Link className="btn" href="/destinos">
                     Ver mais
@@ -90,10 +73,8 @@ export default function Home() {
                 {destinos.slice(0, 2).map((destino) => (
                   <div key={destino.destinoId} className="card text-bg-dark">
                     <Image
-                      className="card-img"
+                      className="card-img rounded-1"
                       src={destino.imagemUrl}
-                      width={500}
-                      height={300}
                       alt="..."
                     />
                     <div className="card-img-overlay">
@@ -114,7 +95,7 @@ export default function Home() {
               <div>
                 <div className="d-flex justify-content-between ver-mais" >
                   <h1 className=" ">Hospedagens</h1>
-                  <Link className="btn" href="hospedagens">
+                  <Link className="btn" href="/hospedagens">
                     Ver mais
                   </Link>
                 </div>
@@ -126,10 +107,11 @@ export default function Home() {
               <div className="d-flex flex-nowrap justify-content-between overflow-x-scroll  ">
                 {hospedagens.slice(0, 4).map((hospedagem) => (
                   <div key={hospedagem.hospedagemId} className="card ">
-                    <img
+                    <Image
                       src={hospedagem.imagemUrl}
                       className="img-fluid rounded-start"
                       alt="..."
+                      fluid
                     />
                     <div className="card-body">
                       <h5 className="card-title">{hospedagem.nomeHotel}</h5>
@@ -144,7 +126,7 @@ export default function Home() {
                         </div>
                       </div>
                       <p>
-                        <i className="bi bi-geo-alt" /> {hospedagem.nomeLocal}
+                        <i className="bi bi-geo-alt" /> {hospedagem.localizacao}
                       </p>
                       <p className="card-text">{hospedagem.descricao}</p>
                       <p>
@@ -176,7 +158,7 @@ export default function Home() {
                 {passagens.slice(0, 4).map((passagem) => (
                   <div key={passagem.passagemId} className="">
                     <div className="card ">
-                      <img
+                      <Image
                         src={passagem.imagemUrl}
                         className="img-fluid rounded-start"
                         alt="..."
@@ -233,7 +215,7 @@ export default function Home() {
                 {pacotes.slice(0, 4).map((promocao) => (
                   <div key={promocao.id} className="">
                     <div className="card ">
-                      <img
+                      <Image
                         src={promocao.imgSrc}
                         className="img-fluid rounded-start"
                         alt="..."

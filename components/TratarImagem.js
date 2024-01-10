@@ -19,15 +19,21 @@ const TratarImagem = ({ imageUrl }) => {
     }
   };
 
-  const imageExists = await checkImageExistence(imageUrl);
+  const loadImage = async () => {
+    const imageExists = await checkImageExistence(imageUrl);
 
-  return (
-    <>
-      {imageExists ? (
-        <Image src={imageUrl} alt="Minha Imagem" width={500} height={300} />
-      ) : (
-        <Image src={defaultImage} alt="Imagem Padrão" width={500} height={300} />
-      )}
-    </>
-  );
+    return (
+      <>
+        {imageExists ? (
+          <Image src={imageUrl} alt="Minha Imagem" width={500} height={300} />
+        ) : (
+          <Image src={defaultImage} alt="Imagem Padrão" width={500} height={300} />
+        )}
+      </>
+    );
+  };
+
+  return loadImage();
 };
+
+export default TratarImagem;

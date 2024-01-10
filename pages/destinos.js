@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Image from "next/image";
+//import Image from "next/image";
+import { Image } from "react-bootstrap";
 import axios from "axios";
 
 export default function Destinos() {
@@ -48,15 +49,7 @@ export default function Destinos() {
                       <Image
                         src={destino.imagemUrl}
                         className="card-img"
-                        sizes="100%"
-                        
-                        width={500}
-                        height={300}
-
-                        style={{
-                          width: '100%',
-                          height: 'auto',
-                        }}
+                        fluid
                       />
                       <div className="card-img-overlay">
                         <h4 className="card-title">{destino.cidade}</h4>

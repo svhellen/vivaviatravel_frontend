@@ -1,4 +1,6 @@
 import axios from "axios";
+//import Image from "next/image";
+import { Image } from "react-bootstrap";
 import React from "react";
 import { useState, useEffect } from "react";
 
@@ -101,7 +103,7 @@ const Hospedagens = () => {
                 {hospedagens.map((hospedagem) => (
                   <div key={hospedagem.hospedagemId} className="col">
                     <div className="card ">
-                      <img
+                      <Image
                         src={hospedagem.imagemUrl}
                         className="card-img-top"
                         width={300} 

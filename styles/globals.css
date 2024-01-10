@@ -290,14 +290,19 @@ main section {
     margin: 0 1rem 1rem 0;
 }
 
-#hospedagens .card img,
+#destinos .card {
+    background: var(--bg-color);
+    min-width: 230px !important;
+    min-height: auto;
+}
+
+/* #hospedagens .card img,
 #promocoes .card img,
 #passagens .card img,
 #destinos .card {
-    /* object-fit: cover; */
     min-width: 100%;
     height: auto;
-}
+} */
 
 .card:hover {
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
