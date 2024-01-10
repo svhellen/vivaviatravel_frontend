@@ -8,7 +8,7 @@ export default function Promocoes() {
 
   useEffect(() => {
       //get all tickets from api
-      axios.get("http://vivaviatravel.somee.com/api/Pacote")
+      axios.get("https://vivaviatravel.somee.com/api/Pacote")
       .then((response) => {
         setPacotes(response.data);
   })

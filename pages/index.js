@@ -5,59 +5,45 @@ import styles from "@/styles/Home.module.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function Home() {
+const API_BASE_URL = "https://vivaviatravel.somee.com/api/";
 
+const fetchApiData = async (endpoint) => {
+  try {
+    const response = await axios.get(API_BASE_URL + endpoint);
+    return response.data;
+  } catch (error) {
+    console.error(`Erro ao buscar a lista de ${endpoint}: `, error);
+    return [];
+  }
+};
+
+export default function Home() {
   const [hospedagens, setHospedagens] = useState([]);
   const [passagens, setPassagens] = useState([]);
   const [pacotes, setPacotes] = useState([]);
   const [destinos, setDestinos] = useState([]);
 
   useEffect(() => {
-    // Hospedagem
-    axios.get('http://vivaviatravel.somee.com/api/Hospedagem')
-      .then((response) => {
-        setHospedagens(response.data);
-      })
-      .catch((error) => {
-        console.error('Erro ao buscar a lista de hospedagens: ', error);
-      });
+    const fetchData = async () => {
+      const [hospedagensData, passagensData, pacotesData, destinosData] = await Promise.all([
+        fetchApiData("Hospedagem"),
+        fetchApiData("Passagem"),
+        fetchApiData("Pacote"),
+        fetchApiData("Destino"),
+      ]);
 
-    // Passagem
-    axios.get('http://vivaviatravel.somee.com/api/Passagem')
-      .then((response) => {
-        setPassagens(response.data);
-      })
-      .catch((error) => {
-        console.error('Erro ao buscar a lista de passagens: ', error);
-      });
+      setHospedagens(hospedagensData);
+      setPassagens(passagensData);
+      setPacotes(pacotesData);
+      setDestinos(destinosData);
+    };
 
-    // Pacote
-    axios.get('http://vivaviatravel.somee.com/api/Pacote')
-      .then((response) => {
-        setPacotes(response.data);
-      })
-      .catch((error) => {
-        console.error('Erro ao buscar a lista de pacotes: ', error);
-      });
-
-    // Destino
-    axios.get('http://vivaviatravel.somee.com/api/Destino')
-      .then((response) => {
-        setDestinos(response.data);
-      })
-      .catch((error) => {
-        console.error('Erro ao buscar a lista de destinos: ', error);
-      });
+    fetchData();
   }, []);
 
-  return (
-    <>
-      <Head>
-        <title>VivaVia Travel</title>
-      </Head>
-        <>
-          <div className="container-fluid py-3 my-3 mx-auto">
-            <section id="top-destinos">
+  const renderDestinos = () => {
+    return (
+      <section id="top-destinos">
               <div>
                 <div className="d-flex justify-content-between ver-mais" >
                   <h1>Destinos</h1>
@@ -84,11 +70,12 @@ export default function Home() {
                 ))}
               </div>
             </section>
-          </div>
-          <div className="d-block">
-            {/* cards hospedagens  */}
+    );
+  };
 
-            <section
+  const renderHospedagens = () => {
+    return (
+      <section
               id="hospedagens"
               className="container-fluid py-3 my-3 mx-auto"
             >
@@ -140,130 +127,147 @@ export default function Home() {
                 ))}
               </div>
             </section>
-            {/* cards passagens  */}
-            <section
-              id="passagens"
-              className="container-fluid py-3 my-3 mx-auto"
-            >
-              <div className=" ver-mais" >
-                <div className="d-flex justify-content-between">
-                  <h1>Passagens Aéreas</h1>
-                  <Link className="btn" href="/passagens">
-                    Ver mais
-                  </Link>
-                </div>
-                <p className="display-4">Compre passagens com um clique.</p>
-              </div>
-              <div className="d-flex flex-nowrap justify-content-between overflow-x-scroll   ">
-                {passagens.slice(0, 4).map((passagem) => (
-                  <div key={passagem.passagemId} className="">
-                    <div className="card ">
-                      <Image
-                        src={passagem.imagemUrl}
-                        className="img-fluid rounded-start"
-                        alt="..."
-                      />
-                      <div className="card-body">
-                        <h5 className="card-title">
-                          Passagem para {passagem.destino}
-                        </h5>
-                        <p className="card-subtitle">
-                          Classe: {passagem.classe}
-                        </p>
-                        <p>
-                          <i className="bi bi-airplane" /> Saindo de{" "}
-                          {passagem.origem}
-                        </p>
-                        <p>
-                          <i className="bi bi-airplane" /> Para{" "}
-                          {passagem.destino}
-                        </p>
-                      </div>
-                      <div className="card-footer">
-                        <p>
-                          Preço a partir de <strong>R$ {passagem.preco}</strong>
-                        </p>
-                        <a
-                          href="#detalhes"
-                          className=" btn btn-primary d-block"
-                        >
-                          Ver detalhes
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-            {/* cards Promoções  */}
-            <section
-              id="promocoes"
-              className="container-fluid py-3 my-3 mx-auto"
-            >
-              <div className=" ver-mais" >
-                <div className="d-flex justify-content-between">
-                  <h1>Pacotes promocionais</h1>
-                  <Link className="btn" href="/promocoes">
-                    Ver mais
-                  </Link>
-                </div>
-                <p className="display-4">
-                  Adquira pacotes com preços incríveis.
+    );
+  };
+
+  const renderPassagens = () => {
+    return (
+      <section
+      id="passagens"
+      className="container-fluid py-3 my-3 mx-auto"
+    >
+      <div className=" ver-mais" >
+        <div className="d-flex justify-content-between">
+          <h1>Passagens Aéreas</h1>
+          <Link className="btn" href="/passagens">
+            Ver mais
+          </Link>
+        </div>
+        <p className="display-4">Compre passagens com um clique.</p>
+      </div>
+      <div className="d-flex flex-nowrap justify-content-between overflow-x-scroll   ">
+        {passagens.slice(0, 4).map((passagem) => (
+          <div key={passagem.passagemId} className="">
+            <div className="card ">
+              <Image
+                src={passagem.imagemUrl}
+                className="img-fluid rounded-start"
+                alt="..."
+              />
+              <div className="card-body">
+                <h5 className="card-title">
+                  Passagem para {passagem.destino}
+                </h5>
+                <p className="card-subtitle">
+                  Classe: {passagem.classe}
+                </p>
+                <p>
+                  <i className="bi bi-airplane" /> Saindo de{" "}
+                  {passagem.origem}
+                </p>
+                <p>
+                  <i className="bi bi-airplane" /> Para{" "}
+                  {passagem.destino}
                 </p>
               </div>
-              <div className="d-flex flex-nowrap justify-content-between overflow-x-scroll  ">
-                {pacotes.slice(0, 4).map((promocao) => (
-                  <div key={promocao.id} className="">
-                    <div className="card ">
-                      <Image
-                        src={promocao.imgSrc}
-                        className="img-fluid rounded-start"
-                        alt="..."
-                      />
-                      <div className="card-body">
-                        <span className="balao-promo position-absolute top-0">
-                          -{promocao.percentDesconto}%
-                        </span>
-                        <h5 className="card-title">
-                          Pacote para {promocao.passagem.destino}
-                        </h5>
-                        <div className="pb-3" />
-                        <p>
-                          <i className="bi bi-airplane" /> Voo direto{" "}
-                          {promocao.passagem.origem}{" "}
-                          <i className="bi bi-arrow-left-right" /> Destino
-                        </p>
-                        <p>
-                          <i className="bi bi-building" /> Hotel{" "}
-                          {promocao.hospedagem.nomeHotel}
-                        </p>
-                        <p className="card-text">
-                          {promocao.hospedagem.descricao}
-                        </p>
-                        <p>
-                          Preço a partir de{" "}
-                          <strong>
-                            R$
-                            {2 *
-                              (promocao.hospedagem.precoDiaria +
-                                promocao.passagem.preco) -
-                              promocao.percentDesconto}
-                          </strong>
-                        </p>
-                        <a href="#detalhes" className=" btn btn-primary d-block">
-                          Ver detalhes
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+              <div className="card-footer">
+                <p>
+                  Preço a partir de <strong>R$ {passagem.preco}</strong>
+                </p>
+                <a
+                  href="#detalhes"
+                  className=" btn btn-primary d-block"
+                >
+                  Ver detalhes
+                </a>
               </div>
-            </section>
+            </div>
           </div>
-        </>
-      {/* )} */}
-      {/* </main>
-   </Layout> */}
+        ))}
+      </div>
+    </section>
+    );
+  };
+
+  const renderPromocoes = () => {
+    return (
+      <section
+      id="promocoes"
+      className="container-fluid py-3 my-3 mx-auto"
+    >
+      <div className=" ver-mais" >
+        <div className="d-flex justify-content-between">
+          <h1>Pacotes promocionais</h1>
+          <Link className="btn" href="/promocoes">
+            Ver mais
+          </Link>
+        </div>
+        <p className="display-4">
+          Adquira pacotes com preços incríveis.
+        </p>
+      </div>
+      <div className="d-flex flex-nowrap justify-content-between overflow-x-scroll  ">
+        {pacotes.slice(0, 4).map((promocao) => (
+          <div key={promocao.id} className="">
+            <div className="card ">
+              <Image
+                src={promocao.imgSrc}
+                className="img-fluid rounded-start"
+                alt="..."
+              />
+              <div className="card-body">
+                <span className="balao-promo position-absolute top-0">
+                  -{promocao.percentDesconto}%
+                </span>
+                <h5 className="card-title">
+                  Pacote para {promocao.passagem.destino}
+                </h5>
+                <div className="pb-3" />
+                <p>
+                  <i className="bi bi-airplane" /> Voo direto{" "}
+                  {promocao.passagem.origem}{" "}
+                  <i className="bi bi-arrow-left-right" /> Destino
+                </p>
+                <p>
+                  <i className="bi bi-building" /> Hotel{" "}
+                  {promocao.hospedagem.nomeHotel}
+                </p>
+                <p className="card-text">
+                  {promocao.hospedagem.descricao}
+                </p>
+                <p>
+                  Preço a partir de{" "}
+                  <strong>
+                    R$
+                    {2 *
+                      (promocao.hospedagem.precoDiaria +
+                        promocao.passagem.preco) -
+                      promocao.percentDesconto}
+                  </strong>
+                </p>
+                <a href="#detalhes" className=" btn btn-primary d-block">
+                  Ver detalhes
+                </a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      </section>
+    );
+  };
+
+  return (
+    <>
+      <Head>
+        <title>VivaVia Travel - Home</title>
+      </Head>
+      <div className="container-fluid py-3 my-3 mx-auto">
+        {renderDestinos()}
+        {renderHospedagens()}
+        {renderPassagens()}
+        {renderPromocoes()}
+      </div>
     </>
   );
 }

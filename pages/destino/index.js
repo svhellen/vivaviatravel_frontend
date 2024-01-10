@@ -8,7 +8,7 @@ const Home = () => {
 
     useEffect(() => {
         //get all tickets from api
-        axios.get("https://localhost:7049/api/Destino")
+        axios.get("https://vivaviatravel.somee.com/api/Destino")
         .then((response) => {
             setDestinos(response.data);
     })
@@ -21,7 +21,7 @@ return (
     <section>
       <h1 className={style.h1}>Lista de Destinos</h1>
       <p>
-        <Link href="destino/add-destino" className="btn-add-admin">
+        <Link href="destino/add-destino" className="btn-add-admin btn disabled">
           Inserir Destino
         </Link>
       </p>
@@ -34,16 +34,17 @@ return (
             <th>Ações</th>
           </tr>
         </thead>
-        {destinos.map((element) => (
-          <tbody key={element.id}>
-            <tr className={style.tabela}>
+        
+          <tbody>
+            {destinos.map((element) => (
+            <tr key={element.id} className={style.tabela}>
               <td>{element.destinoId}</td>
               <td>{element.cidade}</td>
               <td>{element.estado}</td>
               <td>
                 <Link
                   href={`destino/update-destino/${element.destinoId}`}
-                  className="btn btn-warning"
+                  className="btn btn-warning disabled"
                 >
                   Editar
                 </Link>
@@ -55,8 +56,9 @@ return (
                 </Link> */}
               </td>
             </tr>
+            ))}
           </tbody>
-        ))}
+        
       </table>
     </section>
   );

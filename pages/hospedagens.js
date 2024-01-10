@@ -11,7 +11,7 @@ const Hospedagens = () => {
   useEffect(() => {
       //get all tickets from api
       axios
-      .get("http://vivaviatravel.somee.com/api/Hospedagem")
+      .get("https://vivaviatravel.somee.com/api/Hospedagem")
       .then((response) => {
           setHospedagens(response.data);
   })

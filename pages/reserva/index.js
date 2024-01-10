@@ -10,7 +10,7 @@ const Home = () => {
   useEffect(() => {
     //get all tickets from api
     axios
-      .get("http://vivaviatravel.somee.com/api/Reserva")
+      .get("https://vivaviatravel.somee.com/api/Reserva")
       .then((response) => {
         setReservas(response.data);
       })
@@ -25,7 +25,7 @@ const Home = () => {
       <p>
         <Link
           href="reserva/add-reserva"
-          className="btn-add-admin"
+          className="btn-add-admin btn disabled"
         >
           Inserir Reserva
         </Link>
@@ -39,9 +39,9 @@ const Home = () => {
             <th>Ações</th>
           </tr>
         </thead>
-        {reservas.map((element) => (
-          <tbody key={element.id}>
-            <tr className={style.tabela}>
+          <tbody>
+            {reservas.map((element) => (
+            <tr key={element.id} className={style.tabela}>
               <td>{element.reservaId}</td>
               <td>{element.cliente.nome}</td>
               <td>{element.tipoServico}</td>
@@ -53,7 +53,7 @@ const Home = () => {
                     {element.tipoServico === "Pacote" && <ModalPacote />} */}
                     <Link
                       href={`reserva/update-reserva/${element.reservaId}`}
-                      className="btn btn-warning"
+                      className="btn btn-warning disabled"
                     >
                       Editar
                     </Link>
@@ -66,9 +66,10 @@ const Home = () => {
                   </>
                 )}
               </td>
-            </tr>
+            </tr>        
+            ))}
           </tbody>
-        ))}
+
       </table>
     </section>
   );

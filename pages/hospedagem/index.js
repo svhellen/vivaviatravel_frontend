@@ -5,10 +5,10 @@ import { useEffect, useState } from "react";
 
 const Home = () => {
     const [hospedagens, setHospedagens] = useState([]);
-//http://vivaviatravel.somee.com/api/
+//https://vivaviatravel.somee.com/api/
     useEffect(() => {
         //get all tickets from api
-        axios.get("http://vivaviatravel.somee.com/api/Hospedagem")
+        axios.get("https://vivaviatravel.somee.com/api/Hospedagem")
         .then((response) => {
             setHospedagens(response.data);
     })
@@ -22,7 +22,7 @@ return (
       <h1 className={style.h1}>Lista de Passagens</h1>
       <p>
         <Link href="hospedagem/add" 
-        className="btn-add-admin">
+        className="btn-add-admin btn disabled">
           Inserir Hospedagem
         </Link>
       </p>
@@ -30,21 +30,26 @@ return (
         <thead>
           <tr>
             <th>Hospedagem Id</th>
-            <th>Origem</th>
-            <th>Destino</th>
-            <th>Ações</th>{" "}
+            <th>Nome do Hotel</th>
+            <th>Localização</th>
+            <th>Avaliação</th>
+            <th>Preço</th>
+            <th>Ações</th>
           </tr>
         </thead>
-        {hospedagens.map((element) => (
-          <tbody key={element.id}>
-            <tr className={style.tabela}>
+       
+          <tbody> 
+          {hospedagens.map((element) => (
+            <tr key={element.id} className={style.tabela}>
               <td>{element.hospedagemId}</td>
               <td>{element.nomeHotel}</td>
               <td>{element.localizacao}</td>
+              <td>{element.avaliacao}</td>
+              <td>{element.precoDiaria}</td>
               <td>
                 <Link
                   href={`hospedagem/update-hospedagem/${element.hospedagemId}`}
-                  className="btn btn-warning"
+                  className="btn btn-warning disabled"
                 >
                   Editar
                 </Link>
@@ -56,8 +61,9 @@ return (
                 </Link> */}
               </td>
             </tr>
+            ))}
           </tbody>
-        ))}
+        
       </table>
     </section>
   );

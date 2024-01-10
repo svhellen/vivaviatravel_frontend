@@ -8,7 +8,7 @@ const Home = () => {
 
     useEffect(() => {
         //get all tickets from api
-        axios.get("http://vivaviatravel.somee.com/api/Pacote")
+        axios.get("https://vivaviatravel.somee.com/api/Pacote")
         .then((response) => {
           setPacotes(response.data);
     })
@@ -21,24 +21,28 @@ return (
     <section>
       <h1 className={style.h1}>Lista de Pacotes</h1>
       <p>
-        <Link href="pacote/add-pacote" className="btn-add-admin">
-          Inserir Destino
+        <Link href="pacote/add-pacote" className="btn-add-admin btn disabled">
+          Inserir Pacote
         </Link>
       </p>
       <table className="table container tabela">
         <thead>
           <tr>
             <th>Pacote Id</th>
+            <th>Id Hospedagem</th>
             <th>Nome hotel</th>
+            <th>Id Passagem</th>
             <th>Destino passagem</th>
             <th>Ações</th>
           </tr>
         </thead>
-        {pacotes.map((element) => (
-          <tbody key={element.id}>
-            <tr className={style.tabela}>
+          <tbody>
+            {pacotes.map((element) => (
+            <tr key={element.id} className={style.tabela}>
               <td>{element.pacoteId}</td>
+              <td>{element.hospedagem.hospedagemId}</td>
               <td>{element.hospedagem.nomeHotel}</td>
+              <td>{element.passagem.passagemId}</td>
               <td>{element.passagem.destino}</td>
               <td>
                 <Link
@@ -55,8 +59,8 @@ return (
                 </Link> */}
               </td>
             </tr>
+            ))}
           </tbody>
-        ))}
       </table>
     </section>
   );

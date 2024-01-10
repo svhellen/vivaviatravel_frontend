@@ -10,7 +10,7 @@ const Home = () => {
   useEffect(() => {
     // get all clients from api
     axios
-      .get("http://vivaviatravel.somee.com/api/Cliente")
+      .get("https://vivaviatravel.somee.com/api/Cliente")
       .then((response) => {
         setClients(response.data);
       })
@@ -24,7 +24,7 @@ const Home = () => {
       <h1 className={style.h1}>Lista de Clientes</h1>
       <p>
         <Link href="cliente/add-cliente" 
-        className="btn-add-admin" >
+        className="btn btn-add-admin disabled" >
           Inserir Cliente
         </Link>
       </p>
@@ -34,32 +34,36 @@ const Home = () => {
             <th>Cliente Id</th>
             <th>Nome</th>
             <th>Email</th>
+            <th>Telefone</th>
             <th>Ações</th>{" "}
           </tr>
         </thead>
-        {clients.map((element) => (
-          <tbody key={element.id}>
-            <tr className={style.tabela}>
+       
+          <tbody> 
+            {clients.map((element) => (
+            <tr key={element.id} className={style.tabela}>
               <td>{element.clienteId}</td>
               <td>{element.nome}</td>
               <td>{element.email}</td>
+              <td>{element.telefone}</td>
               <td>
                 <Link
                   href={`cliente/update-cliente/${element.clienteId}`}
-                  className="btn btn-warning"
+                  className="btn btn-warning disabled"
                 >
                   Editar
                 </Link>
-                <Link
+                {/* <Link
                   href={`cliente/delete-cliente/${element.clienteId}`}
-                  className="btn btn btn-danger"
+                  className="btn btn btn-danger disabled"
                 >
                   Excluir
-                </Link>
+                </Link> */}
               </td>
             </tr>
+            ))}
           </tbody>
-        ))}
+        
       </table>
     </section>
   );

@@ -10,7 +10,7 @@ export default function Passagens() {
   useEffect(() => {
       //get all tickets from api
       axios
-      .get("http://vivaviatravel.somee.com/api/Passagem")
+      .get("https://vivaviatravel.somee.com/api/Passagem")
       .then((response) => {
           setPassagens(response.data);
   })

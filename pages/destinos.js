@@ -11,7 +11,7 @@ export default function Destinos() {
   useEffect(() => {
       
       axios
-      .get("http://vivaviatravel.somee.com/api/Destino")
+      .get("https://vivaviatravel.somee.com/api/Destino")
       .then((response) => {
           setDestinos(response.data);
   })
