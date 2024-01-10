@@ -40,8 +40,8 @@ const Home = () => {
           </tr>
         </thead>
         {reservas.map((element) => (
-          <tbody>
-            <tr key={element.id} className={style.tabela}>
+          <tbody key={element.id}>
+            <tr className={style.tabela}>
               <td>{element.reservaId}</td>
               <td>{element.cliente.nome}</td>
               <td>{element.tipoServico}</td>
@@ -57,12 +57,12 @@ const Home = () => {
                     >
                       Editar
                     </Link>
-                    <Link
+                    {/* <Link
                       href={`reserva/delete-reserva/${element.reservaId}`}
                       className="btn btn btn-danger"
                     >
                       Excluir
-                    </Link>
+                    </Link> */}
                   </>
                 )}
               </td>
