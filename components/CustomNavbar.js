@@ -162,22 +162,13 @@ const CustomNavbar = () => {
             </div>
             <div className=" d-none d-lg-block login ">
               <ul className='my-auto'>
-                {/* <li className="nav-item ">
-                  <Link className="btn nav-link active " href="/cliente">
-                    Crud
-                  </Link>
-                </li> */}
                 <li className="nav-item ">
                   <DropdownAdmin className={`btn nav-link ${isLinkActive("/cliente" || "/passagem" || "/reserva")}`} />
                 </li>
               </ul>
-
-
             </div>
           </div>
-          {/* <hr /> */}
         </nav>
-        {/* <div>{children}</div> */}
         <BsCarouselHome/>
       </header>
     </>

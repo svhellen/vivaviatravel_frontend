@@ -28,6 +28,7 @@ const Home = () => {
           Inserir Cliente
         </Link>
       </p>
+      <div className="d-flex flex-nowrap justify-content-between overflow-x-scroll  ">
       <table className="table container tabela">
         <thead>
           <tr>
@@ -35,7 +36,7 @@ const Home = () => {
             <th>Nome</th>
             <th>Email</th>
             <th>Telefone</th>
-            <th>Ações</th>{" "}
+            <th>Ações</th>
           </tr>
         </thead>
        
@@ -63,8 +64,8 @@ const Home = () => {
             </tr>
             ))}
           </tbody>
-        
       </table>
+      </div>
     </section>
   );
 };

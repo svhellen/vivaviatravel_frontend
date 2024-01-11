@@ -34,6 +34,7 @@ const Home = () => {
           Inserir Passagem
         </Link>
       </p>
+      <div className="d-flex flex-nowrap justify-content-between overflow-x-scroll  ">
       <table className="table container tabela">
         <thead>
           <tr>
@@ -71,6 +72,7 @@ const Home = () => {
           ))}
         </tbody>
       </table>
+      </div>
     </section>
   );
 };

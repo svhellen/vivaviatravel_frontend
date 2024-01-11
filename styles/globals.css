@@ -358,15 +358,12 @@ scrollbar-color: #f1f1f1 #888; */
     border: 1px solid black;
     border-radius: 25px;
     align-self: center;
-    /* margin: 10px 0; */
 }
 
 .ver-mais a:hover {
     background: var(--cor4);
     color: var(--bg-color);
     border: 1px solid var(--bg-color);
-    /* font-size: 1em; */
-    /* margin: 8px 0; */
 }
 
 .rate {
@@ -424,11 +421,6 @@ scrollbar-color: #f1f1f1 #888; */
     .offcanvas-lg .nav-item .nav-link:hover {
         color: rgba(255, 255, 255, 0.7) !important;
         font-weight: bold;
-
-
-        /* border: 3px solid var(--bg-color2); */
-        font-weight: bold;
-        /* border-bottom:  3px solid var(--bg-color2); */
     }
 
     .login .nav-item .nav-link:hover {
