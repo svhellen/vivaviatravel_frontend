@@ -208,10 +208,10 @@ export default function Home() {
       </div>
       <div className="d-flex flex-nowrap justify-content-between overflow-x-scroll  ">
         {pacotes.slice(0, 4).map((promocao) => (
-          <div key={promocao.id} className="">
+          <div key={promocao.pacoteId} className="">
             <div className="card ">
               <Image
-                src={promocao.imgSrc}
+                src={promocao.imagemUrl}
                 className="img-fluid rounded-start"
                 alt="..."
               />
